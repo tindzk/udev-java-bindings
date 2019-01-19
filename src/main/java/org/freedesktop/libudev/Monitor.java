@@ -100,6 +100,11 @@ public class Monitor implements HasPointer {
         return Device.create(UdevLibrary.INSTANCE().udev_monitor_receive_device(getPointer()));
     }
 
+    public int addMatchSubsystem(final String subsystem) {
+        return UdevLibrary.INSTANCE().udev_monitor_filter_add_match_subsystem_devtype(
+                getPointer(), StringUtil.asPointer(subsystem), null);
+    }
+
     /**
      * This filter is efficiently executed inside the kernel, and libudev subscribers will usually not be woken up for devices which do not match.
      * <p/>
